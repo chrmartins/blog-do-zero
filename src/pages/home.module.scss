@@ -1,12 +1,10 @@
 .posts {
-  margin-top:2rem;
+  margin-top:2em;
 
-  // a que tem dentro
   > a {
     display:block;
   }
 
-  //pega o a que tem outro a depois dele
   a + a {
     margin-top: 3rem;
   }
@@ -19,9 +17,11 @@
     color:var(--highlight);
     margin-top:4rem;
   }
+
 }
 
 .post {
+
   strong {
     font-size:1.75rem;
     font-weight: bold;

@@ -1,16 +1,16 @@
 import { GetStaticProps } from 'next';
-import Link from 'next/link';
+import Head from 'next/head';
 import { FiCalendar, FiUser } from 'react-icons/fi';
 import Prismic from '@prismicio/client';
-import { useState } from 'react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import Head from 'next/head';
-import Header from '../components/Header';
+import Link from 'next/link';
+import { ReactElement, useState } from 'react';
 import { getPrismicClient } from '../services/prismic';
 
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
+import Header from '../components/Header';
 
 interface Post {
   uid?: string;
@@ -35,7 +35,7 @@ interface HomeProps {
 export default function Home({
   postsPagination,
   preview,
-}: HomeProps): JSX.Element {
+}: HomeProps): ReactElement {
   const formattedPost = postsPagination.results.map(post => {
     return {
       ...post,
@@ -61,7 +61,6 @@ export default function Home({
     const postsResults = await fetch(`${nextPage}`).then(response =>
       response.json()
     );
-
     setNextPage(postsResults.next_page);
     setCurrentPage(postsResults.page);
 
@@ -91,6 +90,7 @@ export default function Home({
       <Head>
         <title>Home | spacetraveling</title>
       </Head>
+
       <main className={commonStyles.container}>
         <Header />
 
@@ -133,12 +133,14 @@ export default function Home({
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
   const prismic = getPrismicClient();
+
   const postsResponse = await prismic.query(
     [Prismic.Predicates.at('document.type', 'posts')],
     {
-      pageSize: 1,
+      pageSize: 3,
+      orderings: '[document.last_publication_date desc]',
     }
   );
 
@@ -162,6 +164,8 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       postsPagination,
+      preview,
     },
+    revalidate: 1800,
   };
 };
