@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 
 export default class MyDocument extends Document {
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <Html lang="pt-BR">
@@ -17,7 +20,7 @@ export default class MyDocument extends Document {
           <script
             async
             defer
-            src="https://static.cdn.prismic.io/prismic.js?new=true&repo=spacetraveling2"
+            src="https://static.cdn.prismic.io/prismic.js?new=true&repo=travelling"
           />
         </body>
       </Html>

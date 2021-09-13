@@ -231,7 +231,7 @@ export const getStaticProps: GetStaticProps = async ({
       },
       content: response.data.content.map(content => {
         return {
-          heading: content.heading,
+          heading: content?.heading,
           body: [...content.body],
         };
       }),

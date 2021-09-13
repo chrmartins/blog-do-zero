@@ -1,5 +1,8 @@
-﻿/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+﻿/* eslint-disable consistent-return */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslinteslint-disable @typescript-eslint/no-use-before-define */
+
 import Prismic from '@prismicio/client';
 
 import { Document } from '@prismicio/client/types/documents';
